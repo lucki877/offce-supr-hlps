@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Logs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+  <div class="sidebar">
+    <h2>Admin Panel</h2>
+    <a href="/admin/dashboard" class="nav-item">Dashboard</a>
+    <a href="/admin/analytics" class="nav-item">Analytics</a>
+    <a href="/admin/map" class="nav-item">Map</a>
+    <a href="/admin/settings" class="nav-item">Settings</a>
+    <a href="/admin/logs" class="nav-item active">Logs</a>
+    <a href="/admin/admins" class="nav-item">Admins</a>
+    <a href="/admin/logout" class="nav-item">Logout</a>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title">Admin Logs</div>
+      <div class="topbar-right">
+        <div class="toggle" id="darkToggle">🌙</div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="card" id="logsContainer">
+        Loading logs...
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/logs.js"></script>
+</body>
+</html>

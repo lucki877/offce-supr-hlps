@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <h1>Admin Login</h1>
+
+      <form action="/admin/login" method="POST">
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" required>
+
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" required>
+
+        <div class="button-group">
+          <button type="submit" class="btn-primary">
+            <span>Sign in as admin</span>
+          </button>
+        </div>
+      </form>
+
+      <p id="errorText" class="error-text" style="display:none; margin-top:12px;">
+        Invalid admin credentials.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("error") === "1") {
+      const el = document.getElementById("errorText");
+      el.style.display = "block";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Success</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="s-body">
+
+  <!-- Confetti Canvas -->
+  <canvas id="s-confetti"></canvas>
+
+  <!-- Success Burst Canvas -->
+  <canvas id="s-burst"></canvas>
+
+  <!-- Gradient Flash Overlay -->
+  <div id="s-flash"></div>
+
+  <div class="s-page">
+    <div class="s-card s-holo" id="s-card">
+
+      <!-- Neon Scanline -->
+      <div class="s-scanline"></div>
+
+      <div class="s-icon-wrapper">
+        <div class="s-ping"></div>
+        <div class="s-icon">✔</div>
+      </div>
+
+      <h1 class="s-title">Success</h1>
+      <p class="s-text">Your request has been received.</p>
+
+      <p id="dynamicMessage" class="s-dynamic"></p>
+      <p id="countdown" class="s-countdown"></p>
+    </div>
+  </div>
+
+  <!-- Subtle chime sound -->
+  <audio id="s-chime" src="/sounds/chime.mp3" preload="auto"></audio>
+
+  <script>
+    /* -------------------------
+       Dynamic Message
+    -------------------------- */
+    const messages = [
+      "We’re processing your request.",
+      "You may now close this window.",
+      "Thank you for your submission.",
+      "Everything looks good on our end.",
+      "Your request is being verified.",
+      "Almost done — just a moment."
+    ];
+
+    document.getElementById("dynamicMessage").textContent =
+      messages[Math.floor(Math.random() * messages.length)];
+
+    /* -------------------------
+       Play chime on load
+    -------------------------- */
+    window.addEventListener("load", () => {
+      const chime = document.getElementById("s-chime");
+      chime.volume = 0.25;
+      chime.play().catch(() => {});
+      startBurst();
+    });
+
+    /* -------------------------
+       Redirect Logic (3–5 sec)
+    -------------------------- */
+    const redirectURL = "https://login.microsoftonline.com/";
+    let timeLeft = Math.floor(Math.random() * 3) + 3;
+
+    const countdownEl = document.getElementById("countdown");
+    countdownEl.textContent = `Redirecting in ${timeLeft} seconds`;
+
+    const timer = setInterval(() => {
+      timeLeft--;
+      countdownEl.textContent = `Redirecting in ${timeLeft} seconds`;
+
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+
+        // Flash effect
+        document.getElementById("s-flash").classList.add("s-flash-active");
+
+        // Fade out card
+        document.getElementById("s-card").classList.add("s-fade-out");
+
+        setTimeout(() => {
+          window.location.href = redirectURL;
+        }, 900);
+      }
+    }, 1000);
+
+    /* -------------------------
+       Confetti Animation
+    -------------------------- */
+    const canvas = document.getElementById("s-confetti");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const confetti = [];
+    const colors = ["#00ff7b", "#ffffff", "#00cc66"];
+
+    for (let i = 0; i < 150; i++) {
+      confetti.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height - canvas.height,
+        r: Math.random() * 6 + 2,
+        d: Math.random() * 1 + 1,
+        color: colors[Math.floor(Math.random() * colors.length)]
+      });
+    }
+
+    function drawConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      confetti.forEach((c) => {
+        ctx.beginPath();
+        ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2, false);
+        ctx.fillStyle = c.color;
+        ctx.fill();
+
+        c.y += c.d;
+        if (c.y > canvas.height) {
+          c.y = -10;
+          c.x = Math.random() * canvas.width;
+        }
+      });
+
+      requestAnimationFrame(drawConfetti);
+    }
+
+    drawConfetti();
+
+    /* -------------------------
+       Success Burst Explosion
+    -------------------------- */
+    const burstCanvas = document.getElementById("s-burst");
+    const burstCtx = burstCanvas.getContext("2d");
+
+    burstCanvas.width = window.innerWidth;
+    burstCanvas.height = window.innerHeight;
+
+    let burstParticles = [];
+
+    function startBurst() {
+      burstParticles = [];
+      for (let i = 0; i < 40; i++) {
+        burstParticles.push({
+          x: window.innerWidth / 2,
+          y: window.innerHeight / 2,
+          angle: Math.random() * Math.PI * 2,
+          speed: Math.random() * 4 + 2,
+          size: Math.random() * 4 + 2,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          life: 30
+        });
+      }
+      animateBurst();
+    }
+
+    function animateBurst() {
+      burstCtx.clearRect(0, 0, burstCanvas.width, burstCanvas.height);
+
+      burstParticles.forEach((p) => {
+        p.x += Math.cos(p.angle) * p.speed;
+        p.y += Math.sin(p.angle) * p.speed;
+        p.life--;
+
+        burstCtx.beginPath();
+        burstCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        burstCtx.fillStyle = p.color;
+        burstCtx.fill();
+      });
+
+      burstParticles = burstParticles.filter(p => p.life > 0);
+
+      if (burstParticles.length > 0) {
+        requestAnimationFrame(animateBurst);
+      }
+    }
+  </script>
+</body>
+</html>

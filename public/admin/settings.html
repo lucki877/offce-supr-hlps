@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Settings</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+  <div class="sidebar">
+    <h2>Admin Panel</h2>
+    <a href="/admin/dashboard" class="nav-item">Dashboard</a>
+    <a href="/admin/analytics" class="nav-item">Analytics</a>
+    <a href="/admin/map" class="nav-item">Map</a>
+    <a href="/admin/settings" class="nav-item active">Settings</a>
+    <a href="/admin/logs" class="nav-item">Logs</a>
+    <a href="/admin/admins" class="nav-item">Admins</a>
+    <a href="/admin/logout" class="nav-item">Logout</a>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title">Settings</div>
+      <div class="topbar-right">
+        <div class="toggle" id="darkToggle">🌙</div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="card">
+        <h3>System Settings</h3>
+        <div class="form-group switch">
+          <label>Telegram Notifications</label>
+          <input type="checkbox" id="telegramEnabled">
+        </div>
+
+        <div class="form-group switch">
+          <label>Email Notifications</label>
+          <input type="checkbox" id="emailEnabled">
+        </div>
+
+        <div class="form-group">
+          <label for="autoRefresh">Auto-refresh (seconds)</label>
+          <input type="number" id="autoRefresh" min="0">
+        </div>
+
+        <div class="form-group">
+          <label for="rateLimit">Rate limit (requests per minute)</label>
+          <input type="number" id="rateLimit" min="0">
+        </div>
+
+        <div class="form-group">
+          <label for="blockedIPs">Blocked IPs (comma separated)</label>
+          <input type="text" id="blockedIPs">
+        </div>
+
+        <button class="btn btn-primary" id="saveSettings">Save Settings</button>
+        <p id="settingsStatus" style="margin-top:10px; font-size:13px;"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/settings.js"></script>
+</body>
+</html>

@@ -1,0 +1,557 @@
+/* ---------- Base ---------- */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  color: #1b1b1b;
+  overflow: hidden;
+}
+
+/* ---------- Background slideshow ---------- */
+.bg-slideshow {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.bg-slide {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  opacity: 0;
+  transform: scale(1.03);
+  transition: opacity 1.4s ease, transform 7s ease;
+}
+
+.bg-slide.active {
+  opacity: 1;
+  transform: scale(1.08);
+}
+
+.bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(0,0,0,0.45), rgba(0,0,0,0.6));
+}
+
+/* ---------- Layout ---------- */
+.page {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.card-shell {
+  width: 100%;
+  max-width: 460px;
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 460px;
+  padding: 32px 36px 26px;
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,0.18),
+    0 14px 28px rgba(0,0,0,0.35);
+  position: relative;
+}
+
+/* ---------- Brand row ---------- */
+.brand-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.brand-logo-mark {
+  display: grid;
+  grid-template-columns: repeat(2, 11px);
+  grid-template-rows: repeat(2, 11px);
+  gap: 2px;
+}
+
+.mark-sq {
+  width: 11px;
+  height: 11px;
+}
+
+.mark-sq.red    { background: #f3542b; }
+.mark-sq.green  { background: #7fbf1c; }
+.mark-sq.blue   { background: #00a1e6; }
+.mark-sq.yellow { background: #ffc843; }
+
+.brand-text {
+  font-size: 19px;
+  margin-left: 8px;
+  letter-spacing: 0.02em;
+}
+
+/* ---------- Step containers ---------- */
+.step {
+  display: none;
+}
+
+.step.active {
+  display: block;
+}
+
+.fade-step {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.fade-step.show {
+  opacity: 1;
+}
+
+/* ---------- Slide animations ---------- */
+.slide-in-left {
+  animation: slideInLeft 0.35s ease forwards;
+}
+
+.slide-out-left {
+  animation: slideOutLeft 0.35s ease forwards;
+}
+
+.slide-in-right {
+  animation: slideInRight 0.35s ease forwards;
+}
+
+.slide-out-right {
+  animation: slideOutRight 0.35s ease forwards;
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideOutLeft {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(-40px); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideOutRight {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(40px); }
+}
+
+/* ---------- Headings & text ---------- */
+h1 {
+  font-size: 24px;
+  font-weight: 400;
+  margin: 0 0 16px 0;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+/* ---------- Inputs ---------- */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #8a8886;
+  padding: 8px 0 6px;
+  font-size: 15px;
+  color: #1b1b1b;
+  outline: none;
+  background: transparent;
+}
+
+input:focus {
+  border-bottom: 2px solid #1b7ddc;
+}
+
+.error-text {
+  display: none;
+  font-size: 12px;
+  color: #d13438;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+/* ---------- Links ---------- */
+.link {
+  font-size: 13px;
+  color: #1b7ddc;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.link-block {
+  display: inline-block;
+  margin-top: 10px;
+}
+
+/* ---------- Buttons (Unified Group) ---------- */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.btn-primary,
+.btn-secondary {
+  width: 100%;
+  padding: 12px 0;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.btn-primary {
+  border: none;
+  background: #1b7ddc;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background: #155fa7;
+}
+
+.btn-secondary {
+  border: 1px solid #8a8886;
+  background: transparent;
+  color: #1b1b1b;
+}
+
+.btn-secondary span {
+  display: inline-flex;
+  align-items: center;
+}
+
+.key-icon {
+  font-size: 14px;
+}
+
+/* ---------- Footer ---------- */
+.footer-links {
+  position: fixed;
+  bottom: 16px;
+  right: 24px;
+  display: flex;
+  gap: 16px;
+  font-size: 11px;
+  color: #f3f2f1;
+}
+
+.footer-links a {
+  color: #f3f2f1;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 560px) {
+  .card {
+    max-width: 100%;
+    padding: 24px 22px 20px;
+  }
+
+  .footer-links {
+    justify-content: center;
+  }
+}
+
+/* ---------- Spinner (Sign-in button) ---------- */
+.btn-primary.loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.btn-primary.loading span {
+  visibility: hidden;
+}
+
+.btn-primary.loading::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #fff;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---------- Progress bar during checking ---------- */
+.progress-bar {
+  width: 0%;
+  height: 3px;
+  background: #1b7ddc;
+  margin-top: 8px;
+  border-radius: 2px;
+  transition: width 1.2s ease;
+  opacity: 0;
+}
+
+.progress-bar.active {
+  opacity: 1;
+  width: 100%;
+}
+
+/* ---------- Popup container ---------- */
+.popup {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.popup.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- Popup box ---------- */
+.popup-box {
+  background: #ffffff;
+  padding: 22px 26px;
+  border-radius: 6px;
+  text-align: center;
+  width: 260px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.3);
+}
+
+.small {
+  padding: 8px 0;
+  font-size: 14px;
+}
+
+/* ---------- Try again animation ---------- */
+@keyframes tryAgainPulse {
+  0%   { box-shadow: 0 0 0px rgba(27,125,220,0); }
+  50%  { box-shadow: 0 0 12px rgba(27,125,220,0.6); }
+  100% { box-shadow: 0 0 0px rgba(27,125,220,0); }
+}
+
+.try-again {
+  animation: tryAgainPulse 1.2s ease;
+}
+
+/* ---------- Redirect animation overlay ---------- */
+.redirecting::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(27,125,220,0.85);
+  animation: redirectFade 0.6s ease forwards;
+  z-index: 9999;
+}
+
+@keyframes redirectFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Success Page — Prefixed, Brand-Matched, Animated */
+
+.s-body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #0d0f12;
+  overflow: hidden;
+  color: #e5e5e5;
+}
+
+#s-confetti,
+#s-burst {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+#s-flash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255,255,255,0.9), rgba(0,0,0,0));
+  opacity: 0;
+  pointer-events: none;
+  z-index: 3;
+  transition: opacity 0.4s ease;
+}
+
+.s-flash-active {
+  opacity: 1;
+}
+
+.s-page {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.s-card {
+  background: #14171c;
+  padding: 40px 30px;
+  border-radius: 14px;
+  max-width: 350px;
+  margin: auto;
+  border: 2px solid rgba(0,255,120,0.4);
+  box-shadow: 0 0 25px rgba(0,255,120,0.25);
+  animation: s-pop-in 0.6s ease, s-glow 2s infinite alternate ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Neon Scanline */
+.s-scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #00ff7b, transparent);
+  animation: s-scan 2.5s infinite linear;
+  opacity: 0.8;
+}
+
+@keyframes s-scan {
+  0% { top: 0; }
+  100% { top: 100%; }
+}
+
+/* Holographic Shimmer */
+.s-holo::after {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 250%;
+  height: 250%;
+  background: linear-gradient(
+    120deg,
+    rgba(255,255,255,0.05),
+    rgba(0,255,120,0.15),
+    rgba(255,255,255,0.05)
+  );
+  transform: rotate(25deg);
+  animation: s-holo 4s infinite ease-in-out;
+}
+
+@keyframes s-holo {
+  0% { transform: translate(-50%, -50%) rotate(25deg); }
+  50% { transform: translate(0%, 0%) rotate(25deg); }
+  100% { transform: translate(-50%, -50%) rotate(25deg); }
+}
+
+/* Ripple Ping */
+.s-icon-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.s-ping {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(0,255,120,0.25);
+  top: -10px;
+  left: -10px;
+  animation: s-ping 1.8s infinite ease-out;
+}
+
+@keyframes s-ping {
+  0% { transform: scale(0.6); opacity: 0.8; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+.s-icon {
+  font-size: 60px;
+  color: #00ff7b;
+  position: relative;
+  z-index: 2;
+}
+
+.s-title {
+  margin: 0;
+  font-size: 28px;
+  color: #ffffff;
+}
+
+.s-text {
+  margin-top: 10px;
+  color: #cfcfcf;
+}
+
+.s-dynamic {
+  font-size: 15px;
+  margin-top: 10px;
+  color: #9f9f9f;
+}
+
+.s-countdown {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #7f7f7f;
+}
+
+/* Fade-out before redirect */
+.s-fade-out {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* Glow + Pop Animations */
+@keyframes s-pop-in {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes s-glow {
+  from { box-shadow: 0 0 15px rgba(0,255,120,0.2); }
+  to { box-shadow: 0 0 35px rgba(0,255,120,0.5); }
+}
